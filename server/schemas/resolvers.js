@@ -41,7 +41,7 @@ const resolvers = {
       const user = await User.create(args);
       const token = signToken(user);
 
-      return { user, token };
+      return { token, user };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -56,7 +56,7 @@ const resolvers = {
         throw new AuthenticationError("Incorrect credentials");
       }
       const token = signToken(user);
-      return { user, token };
+      return { token, user };
     },
     addThought: async (parent, args, context) => {
       if (context.user) {
